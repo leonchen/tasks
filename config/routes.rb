@@ -1,4 +1,5 @@
 Tasks::Application.routes.draw do
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -25,6 +26,20 @@ Tasks::Application.routes.draw do
   #     end
   #   end
 
+
+  resources :taskgroups do
+    resources :tasks do
+      get 'history'
+      get 'latest'
+    end
+  end
+
+  resources :resources do
+    resources :tasks
+  end
+
+  resources :tasks
+
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
@@ -48,7 +63,7 @@ Tasks::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'index#index'
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,0 +1,6 @@
+%h3 
+  =link_to 'Resources', resources_path
+  &raquo;
+  =@model.name
+
+= render :partial => "form", :locals => {:model => @model}

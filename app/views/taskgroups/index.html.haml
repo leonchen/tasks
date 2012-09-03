@@ -1,0 +1,29 @@
+%h3 
+  =link_to 'TaskGroups', taskgroups_path
+%p
+  %input.create{:type => 'button', :value => 'Create New Taskgroup'}
+  %div#entityForm
+    = render :partial => "form", :locals => {:model => @taskgroup}
+  %div#entityList
+    %table.table
+      %tr
+        %th Name
+        %th Settings
+        %th Tasks
+        %th Enabled
+        %th Logging
+        %th Running
+        %th
+      - @taskgroups.each do |tg|
+        %tr
+          %td= tg.name
+          %td= tg.settings
+          %td= link_to tg.tasks_count, taskgroup_path(tg)
+          %td.center
+            %img{:src => "/assets/#{tg.enabled ? 'running' : 'stopped'}.png"}
+          %th.center=tg.logging
+          %td.center
+            %img{:src => "/assets/#{tg.is_running ? 'running' : 'stopped'}.png"}
+          %td
+            =link_to 'Edit', edit_taskgroup_path(tg), :class => "editButton"
+            =link_to 'Remove', taskgroup_path(tg), :method => :delete, :confirm => tg.tasks_count > 0 ? "Are you sure to delete this taskgroup with all its tasks?" : nil, :class => "deleteButton"

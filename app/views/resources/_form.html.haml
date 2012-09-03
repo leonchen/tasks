@@ -1,0 +1,13 @@
+= form_for(model) do |f|
+  %table
+    %tr
+      %th Name
+      %td
+        =f.text_field :name
+    %tr
+      %th Enabled
+      %td
+        =f.check_box :enabled
+  %p
+    =f.submit
+    =button_tag "Cancel", :type => "button", :class => "cancelButton"

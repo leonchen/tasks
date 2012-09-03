@@ -1,0 +1,22 @@
+%h3 
+  =link_to 'Resources', resources_path
+%p
+  %input.create{:type => 'button', :value => 'Create New Resource'}
+  %div#entityForm
+    = render :partial => "form", :locals => {:model => @resource}
+  %div#entityList
+    %table.table
+      %tr
+        %th Name
+        %th Tasks
+        %th Enabled
+        %th
+      - @resources.each do |r|
+        %tr
+          %td= r.name
+          %td= r.tasks.size
+          %td.center 
+            %img{:src => "/assets/#{r.enabled ? 'running' : 'stopped'}.png"}
+          %td
+            =link_to 'Edit', edit_resource_path(r), :class => "editButton"
+            =link_to 'Remove', resource_path(r), :method => :delete, :confirm => r.tasks.size > 0 ? "Are you sure to delete this resource with all its tasks?" : nil, :class => "deleteButton"

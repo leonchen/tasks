@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title Schedule Tasks
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    #header
+      %span#logo 
+        %a{:href => "/"} Schedule Tasks
+      %span#mainMenu
+        = link_to 'Tasks', taskgroups_path
+        = link_to 'Resources', resources_path
+    #body
+      #messages
+        - if flash[:notice]
+          %p.notice
+            = flash[:notice]
+        - if flash[:error]
+          %p.error
+            = flash[:error]
+
+      = yield
+    #footer
+

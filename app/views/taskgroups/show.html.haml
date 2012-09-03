@@ -1,0 +1,37 @@
+%h3
+  =link_to 'TaskGroups', taskgroups_path
+  &raquo;
+  =link_to @model.name, taskgroup_path(@model)
+%p
+  %input.create{:type => 'button', :value => 'Create New Task'}
+  %div#entityForm
+    = render :partial => "tasks/form", :locals => {:model => @model, :task => @task}
+  %div#entityList
+    %table.table
+      %tr
+        %th Name
+        %th Resource 
+        %th Resource Data
+        %th Enabled
+        %th Running
+        %th Last Run
+        %th Last Time
+        %th Last Status
+        %th Last value
+        %th
+      - @tasks.each do |t|
+        %tr
+          %td= t.name
+          %td= t.resource.name
+          %td= t.resource_data
+          %td.center 
+            %img{:src => "/assets/#{t.enabled ? 'running' : 'stopped'}.png"}
+          %td.center
+            %img{:src => "/assets/#{t.is_running ? 'running' : 'stopped'}.png"}
+          %td.timestamp= t.last_run || 'Never'
+          %td= t.last_runtime
+          %td= t.last_status
+          %td= t.last_value
+          %td
+            =link_to 'Edit', edit_taskgroup_task_path(@model, t), :class => "editButton"
+            =link_to 'Remove', taskgroup_task_path(@model, t), :method => :delete, :confirm => "Are you sure to delete this task?", :class => "deleteButton"

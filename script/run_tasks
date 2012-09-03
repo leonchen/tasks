@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+
+require File.expand_path('../../config/environment',  __FILE__)
+
+Taskgroup.where(:enabled => true).each do |tg|
+  tg.run
+  tg.tasks.find_each(:batch_size => 100, :conditions =>["enabled = ? and last_run < ?", true, Time.now - tg.interval.seconds]) do |t|
+    puts "run task: #{tg.name} > #{t.name}" 
+    t.run
+    puts "finish task: #{tg.name} > #{t.name}" 
+  end
+  tg.stop
+end

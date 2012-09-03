@@ -1,0 +1,22 @@
+= form_for([model, task]) do |f|
+  %table
+    %tr
+      %th Name
+      %td
+        =f.text_field :name
+    %tr
+      %th Resource
+      %td
+        =f.collection_select :resource_id, @resources, :id, :name
+    %tr
+      %th Resource Data
+      %td
+        =f.text_area :resource_data
+    %tr
+      %th Enabled
+      %td
+        =f.check_box :enabled
+
+  %p
+    =f.submit
+    =button_tag "Cancel", :type => "button", :class => "cancelButton"

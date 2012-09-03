@@ -1,0 +1,88 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  font-family:Helvetica,arial,freesans,clean,sans-serif;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  color: blue;
+  cursor: pointer;
+}
+
+#header{
+  clear: both;
+  height: 30px;
+  padding: 5px 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+#body{
+  margin: 0px 20px;
+}
+
+#logo{
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 5px;
+  float: left;
+  margin-right: 40px;
+}
+#logo a{
+  color: #fff;
+  text-decoration: none;
+}
+
+#mainMenu a{
+  color: #bbb;
+  padding: 10px 20px;
+  font-weight: bold;
+  text-decoration: none;
+  float:left;
+}
+#mainMenu a:hover{
+  color: #fff;
+  cursor: pointer;
+}
+#mainMenu a.current{
+  background-color: #fff;
+  color: #000;
+}
+
+#messages p{
+  text-align: left;
+  border-top: none;
+  margin:0px;
+}
+#messages p span{
+  background-color: yellow;
+  border: 1px solid #ccc;
+  padding: 2px 10px;
+  font-size: 12px;
+}
+
+#entityForm{
+  display: none;
+  border: 1px solid #999;
+  padding: 20px;
+}
+
+.table{
+  border: 1px solid #000;
+  margin: 10px 0px;
+}
+.table td,.table th {
+  border: 1px solid #000;
+  padding: 5px;
+}
+.table a{
+  margin: 0px 5px;
+}
+
+.center{
+  text-align: center
+}

@@ -1,0 +1,9 @@
+%h3
+  =link_to 'TaskGroups', taskgroups_path
+  &raquo;
+  =link_to @taskgroup.name, taskgroup_path(@taskgroup)
+  &raquo;
+  = @model.name
+
+= render :partial => "tasks/form", :locals => {:model => @taskgroup, :task => @model}
+
