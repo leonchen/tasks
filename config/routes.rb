@@ -1,5 +1,9 @@
 Tasks::Application.routes.draw do
 
+  get "status/running"
+
+  get "status/last_run"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -40,6 +44,11 @@ Tasks::Application.routes.draw do
 
   resources :tasks
 
+  resources :status do
+    get 'running'
+    get 'last_run'
+  end
+
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
@@ -60,6 +69,7 @@ Tasks::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

@@ -1,0 +1,19 @@
+%h3 Running status
+#runningTasks
+  %table.table
+    %thead
+      %th Task
+      %th Running?
+      %th Last Status
+      %th Last Run
+      %th Last Run Time
+    %tbody
+      - @latest_tasks.each do |lt|
+        %tr
+          %td= "#{lt.taskgroup.name} > #{lt.name}"
+          %td.center
+            %img{:src => "/assets/#{lt.is_running ? 'running' : 'stopped'}.png"}
+          %td= lt.last_status
+          %td= lt.last_run
+          %td= lt.last_runtime
+
