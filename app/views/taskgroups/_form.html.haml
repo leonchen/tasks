@@ -5,9 +5,13 @@
       %td
         =f.text_field :name
     %tr
-      %th Settings
+      %th Resource
       %td
-        =f.text_area :settings 
+        =f.collection_select :resource_id, @resources, :id, :name
+    %tr
+      %th Resource Settings
+      %td
+        =f.text_area :resource_settings 
     %tr
       %th Interval
       %td

@@ -9,7 +9,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @resources = Resource.all(:conditions => {:enabled => true})
   end
 
   def update

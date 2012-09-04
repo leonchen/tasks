@@ -1,13 +1,14 @@
 class Task < ActiveRecord::Base
 
-  attr_accessible :name, :enabled, :taskgroup_id, :resource_id, :resource_data
+  attr_accessible :name, :enabled, :taskgroup_id, :resource_data
 
   belongs_to :taskgroup, :counter_cache => true
-  belongs_to :resource, :counter_cache => true 
+
+  before_create :initial_status
 
   def run
     running
-    result = Resource.get_resource(self.resource_id).run(self.resource_data)
+    result = self.taskgroup.run_task(self)
     self.last_runtime = result.runtime
     self.last_status = result.status
     self.last_value = result.value
@@ -27,5 +28,9 @@ class Task < ActiveRecord::Base
   def finish
     self.is_running = false
     self.save
+  end
+
+  def initial_status
+    self.last_run = 0
   end
 end

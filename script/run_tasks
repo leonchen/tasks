@@ -3,7 +3,7 @@
 
 require File.expand_path('../../config/environment',  __FILE__)
 
-Taskgroup.where(:enabled => true).each do |tg|
+Taskgroup.includes(:resource).where(:enabled => true).each do |tg|
   tg.run
   tg.tasks.find_each(:batch_size => 100, :conditions =>["enabled = ? and last_run < ?", true, Time.now - tg.interval.seconds]) do |t|
     puts "run task: #{tg.name} > #{t.name}" 

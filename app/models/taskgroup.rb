@@ -1,11 +1,13 @@
 require 'json'
 
 class Taskgroup < ActiveRecord::Base
-  attr_accessible :name, :settings, :enabled, :interval, :logging
-  serialize :settings, Hash
+  attr_accessible :name, :resource_id, :resource_settings, :enabled, :interval, :logging
+  serialize :resource_settings, Hash
 
+  belongs_to :resource 
   has_many :tasks, :dependent => :destroy
-  before_save :parse_settings
+
+  before_save :parse_resource_settings
 
   def run
     update_attribute(:is_running, true)
@@ -15,9 +17,18 @@ class Taskgroup < ActiveRecord::Base
     update_attribute(:is_running, false)
   end
 
+  def run_task(task)
+    return get_resource.run(task.resource_data)
+  end
+
+  def get_resource
+    @cached_resource ||= Resource.get_resource(self.resource, self.resource_settings)
+    return @cached_resource
+  end
+
   private
 
-  def parse_settings
-    self.settings = JSON.parse(self.settings) if self.settings.is_a? String
+  def parse_resource_settings
+    self.resource_settings = JSON.parse(self.resource_settings) if self.resource_settings.is_a? String
   end
 end

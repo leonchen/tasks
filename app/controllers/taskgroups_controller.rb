@@ -6,6 +6,7 @@ class TaskgroupsController < ApplicationController
   def index
     @taskgroup = Taskgroup.new
     @taskgroups = Taskgroup.all
+    @resources = Resource.all(:conditions => {:enabled => true})
   end
 
   def new
@@ -19,11 +20,11 @@ class TaskgroupsController < ApplicationController
 
   def show
     @task = @model.tasks.build
-    @tasks = @model.tasks.all(:include => :resource) 
-    @resources = Resource.all(:conditions => {:enabled => true})
+    @tasks = @model.tasks.all 
   end
 
   def edit
+    @resources = Resource.all(:conditions => {:enabled => true})
   end
 
   def update

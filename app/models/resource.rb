@@ -4,11 +4,7 @@ class Resource < ActiveRecord::Base
 
   has_many :tasks, :dependent => :destroy
 
-  def self.get_resource(id)
-    @@resources ||= self.where(:enabled => true).inject({}) do |h, r|
-      h[r.id] = "Resources::#{r.name.classify}".constantize.new
-      h
-    end
-    return @@resources[id]
+  def self.get_resource(r, settings)
+    return "Resources::#{r.name.classify}".constantize.new(settings)
   end
 end

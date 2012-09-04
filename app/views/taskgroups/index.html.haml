@@ -8,7 +8,8 @@
     %table.table
       %tr
         %th Name
-        %th Settings
+        %th Resource 
+        %th Resource Settings
         %th Tasks
         %th Enabled
         %th Logging
@@ -16,8 +17,9 @@
         %th
       - @taskgroups.each do |tg|
         %tr
-          %td= tg.name
-          %td= tg.settings
+          %td= link_to tg.name, taskgroup_path(tg)
+          %td= tg.resource.name
+          %td= tg.resource_settings
           %td= link_to tg.tasks_count, taskgroup_path(tg)
           %td.center
             %img{:src => "/assets/#{tg.enabled ? 'running' : 'stopped'}.png"}

@@ -5,10 +5,6 @@
       %td
         =f.text_field :name
     %tr
-      %th Resource
-      %td
-        =f.collection_select :resource_id, @resources, :id, :name
-    %tr
       %th Resource Data
       %td
         =f.text_area :resource_data

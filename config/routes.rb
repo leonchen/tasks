@@ -38,9 +38,7 @@ Tasks::Application.routes.draw do
     end
   end
 
-  resources :resources do
-    resources :tasks
-  end
+  resources :resources
 
   resources :tasks
 

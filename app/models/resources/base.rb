@@ -1,7 +1,7 @@
 module Resources
   class Base
 
-    def initialize
+    def initialize(settings)
     end
 
     def run(data)

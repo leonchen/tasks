@@ -10,7 +10,6 @@
     %table.table
       %tr
         %th Name
-        %th Resource 
         %th Resource Data
         %th Enabled
         %th Running
@@ -22,7 +21,6 @@
       - @tasks.each do |t|
         %tr
           %td= t.name
-          %td= t.resource.name
           %td= t.resource_data
           %td.center 
             %img{:src => "/assets/#{t.enabled ? 'running' : 'stopped'}.png"}
