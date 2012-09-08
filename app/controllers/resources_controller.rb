@@ -8,8 +8,10 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    @resource = Resource.new(params[:resource])
-    @resource.save
+    if Resource.resource_available?(params[:resource][:name])
+      @resource = Resource.new(params[:resource])
+      @resource.save
+    end
     redirect_to resources_path 
   end
 
