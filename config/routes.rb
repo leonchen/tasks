@@ -36,6 +36,8 @@ Tasks::Application.routes.draw do
       get 'history'
       get 'latest'
     end
+
+    get 'latest'
   end
 
   resources :resources

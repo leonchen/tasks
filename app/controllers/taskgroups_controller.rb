@@ -1,15 +1,12 @@
 class TaskgroupsController < ApplicationController
 
-  before_filter :load_model, :only => [:show, :edit, :update, :destroy]
+  before_filter :load_model, :except => [:index, :create]
 
 
   def index
     @taskgroup = Taskgroup.new
     @taskgroups = Taskgroup.all
     @resources = Resource.all(:conditions => {:enabled => true})
-  end
-
-  def new
   end
 
   def create
@@ -37,9 +34,25 @@ class TaskgroupsController < ApplicationController
     redirect_to taskgroups_path
   end
 
+
+  def latest
+    tasks = @model.tasks
+    payload = {}
+    tasks.each do |t|
+      payload[t.name] = {
+        :status => t.last_status,
+        :value => t.last_value,
+        :runtime => t.last_runtime,
+        :timestamp => t.last_run.to_i,
+        :resource_data => t.resource_data
+      }
+    end
+    render :json => payload
+  end
+
   private
 
   def load_model
-    @model = Taskgroup.find(params[:id])
+    @model = Taskgroup.find(params[:taskgroup_id] || params[:id])
   end
 end
