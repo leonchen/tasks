@@ -14,7 +14,7 @@ module Resources
         path = "/#{path}" unless path =~ /^\// 
         path = "http://#{@host}:#{@port}#{path}"
       end
-      path += '&' + @extra_params
+      path += (path =~ /\?/ ? '&' : '?') + @extra_params
 
       start_time = Time.now.to_f
       r = Result.new
